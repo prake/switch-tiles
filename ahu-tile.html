@@ -32,6 +32,8 @@
 
     .section {
       margin-top: 18px;
+      border-top: 1px solid #eee;
+      padding-top: 12px;
     }
 
     .section h3 {
@@ -40,25 +42,27 @@
       color: #333;
     }
 
-    .section p {
-      margin: 4px 0;
+    .row-label {
+      display: flex;
+      justify-content: space-between;
       font-size: 14px;
+      margin: 2px 0;
     }
 
-    .label {
+    .row-label span.label {
       font-weight: bold;
     }
 
-    .grid-two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px 20px;
+    .row-label span.value {
+      text-align: right;
+      white-space: nowrap;
     }
 
-    .running { color: green; font-weight: bold; }
-    .notrunning { color: #888; }
-    .status-label { display: inline-block; min-width: 90px; }
-    .value-highlight { font-weight: bold; }
+    p.description {
+      font-size: 13px;
+      font-style: italic;
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
@@ -67,36 +71,34 @@
 
     <div class="section">
       <h3>Current Conditions</h3>
-      <div class="grid-two-col">
-        <p><span class="label">Discharge Temp:</span> <span id="dischargeTemp"></span></p>
-        <p><span class="label">Setpoint:</span> <span id="setpoint"></span></p>
-        <p><span class="label">Return Temp:</span> <span id="returnTemp"></span></p>
-        <p><span class="label">Mixed Temp:</span> <span id="mixedTemp"></span></p>
-        <p><span class="label">Fan Command:</span> <span id="fanCommand"></span></p>
-        <p><span class="label">Fan Status:</span> <span id="fanStatus"></span></p>
-        <p><span class="label">Speed:</span> <span id="speed"></span></p>
-        <p><span class="label">Pressure SP:</span> <span id="pressureSP"></span></p>
-        <p><span class="label">Cooling Demand:</span> <span id="coolCall"></span></p>
-        <p><span class="label">Heating Demand:</span> <span id="heatCall"></span></p>
-        <p><span class="label">Occupancy Status:</span> <span id="occupancy"></span></p>
-      </div>
-      <p><em>This is a snapshot of current readings from the AHU.</em></p>
+      <div class="row-label"><span class="label">Discharge Temp:</span> <span class="value" id="dischargeTemp"></span></div>
+      <div class="row-label"><span class="label">Setpoint:</span> <span class="value" id="setpoint"></span></div>
+      <div class="row-label"><span class="label">Return Temp:</span> <span class="value" id="returnTemp"></span></div>
+      <div class="row-label"><span class="label">Mixed Temp:</span> <span class="value" id="mixedTemp"></span></div>
+      <div class="row-label"><span class="label">Fan Command:</span> <span class="value" id="fanCommand"></span></div>
+      <div class="row-label"><span class="label">Fan Status:</span> <span class="value" id="fanStatus"></span></div>
+      <div class="row-label"><span class="label">Speed:</span> <span class="value" id="speed"></span></div>
+      <div class="row-label"><span class="label">Pressure SP:</span> <span class="value" id="pressureSP"></span></div>
+      <div class="row-label"><span class="label">Cooling Demand:</span> <span class="value" id="coolCall"></span></div>
+      <div class="row-label"><span class="label">Heating Demand:</span> <span class="value" id="heatCall"></span></div>
+      <div class="row-label"><span class="label">Occupancy Status:</span> <span class="value" id="occupancy"></span></div>
+      <p class="description">This is a snapshot of current readings from AHU sensors.</p>
     </div>
 
     <div class="section">
       <h3>Runtime Summary</h3>
-      <p><span class="label">Weekly Runtime (so far):</span> <span id="runtime"></span> hrs</p>
-      <p><span class="label">Avg Daily Runtime (7 Days):</span> <span id="avgDaily"></span> hrs/day</p>
-      <p><span class="label">Run Status:</span> <span id="runtimeStatus"></span></p>
-      <p><em>This shows how much the fan was running in the past week and whether it’s currently active.</em></p>
+      <div class="row-label"><span class="label">Weekly Runtime (so far):</span> <span class="value" id="runtime"></span> hrs</div>
+      <div class="row-label"><span class="label">Avg Daily Runtime (7 Days):</span> <span class="value" id="avgDaily"></span> hrs/day</div>
+      <div class="row-label"><span class="label">Run Status:</span> <span class="value" id="runtimeStatus"></span></div>
+      <p class="description">This shows how much the fan was running in the past week and whether it’s currently active.</p>
     </div>
 
     <div class="section">
       <h3>Temperature Insights</h3>
-      <p><span class="label">Max Deviation:</span> <span id="maxDev"></span> °C</p>
-      <p><span class="label">Avg Deviation:</span> <span id="avgDev"></span> °C</p>
-      <p><span class="label">Stability (Std Dev):</span> <span id="stability"></span> °C</p>
-      <p><em>Shows how closely the discharge air temp tracked its setpoint, and how stable it was overall.</em></p>
+      <div class="row-label"><span class="label">Max Deviation:</span> <span class="value" id="maxDev"></span> °C</div>
+      <div class="row-label"><span class="label">Avg Deviation:</span> <span class="value" id="avgDev"></span> °C</div>
+      <div class="row-label"><span class="label">Stability (Std Dev):</span> <span class="value" id="stability"></span> °C</div>
+      <p class="description">Shows how closely the discharge air temp tracked its setpoint, and how stable it was overall.</p>
     </div>
   </div>
 
