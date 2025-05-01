@@ -17,7 +17,7 @@
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       background-color: #fff;
       border-left: 10px solid #28a745;
       border-radius: 10px;
@@ -31,7 +31,7 @@
     }
 
     .section {
-      margin-top: 16px;
+      margin-top: 18px;
     }
 
     .section h3 {
@@ -45,16 +45,6 @@
       font-size: 14px;
     }
 
-    .highlight {
-      font-weight: bold;
-      font-size: 16px;
-    }
-
-    .emoji {
-      font-size: 20px;
-      vertical-align: middle;
-    }
-
     .label {
       font-weight: bold;
     }
@@ -62,45 +52,50 @@
     .grid-two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px 24px;
+      gap: 10px 20px;
     }
+
+    .running { color: green; font-weight: bold; }
+    .notrunning { color: #888; }
+    .status-label { display: inline-block; min-width: 90px; }
+    .value-highlight { font-weight: bold; }
   </style>
 </head>
 <body>
-  <div class="tile" id="tile">
-    <h2><span class="emoji" id="statusEmoji">🔧</span> <span id="ahuLabel">AHU</span> Summary</h2>
+  <div class="tile">
+    <h2><span id="ahuLabel">AHU</span> Summary</h2>
 
     <div class="section">
       <h3>Current Conditions</h3>
       <div class="grid-two-col">
-        <p><span class="label">Discharge Temp:</span> <span id="dischargeTemp">--</span></p>
-        <p><span class="label">Setpoint:</span> <span id="setpoint">--</span></p>
-        <p><span class="label">Return Temp:</span> <span id="returnTemp">--</span></p>
-        <p><span class="label">Mixed Temp:</span> <span id="mixedTemp">--</span></p>
-        <p><span class="label">Fan Command:</span> <span id="fanCommand">--</span></p>
-        <p><span class="label">Fan Status:</span> <span id="fanStatus">--</span></p>
-        <p><span class="label">Speed:</span> <span id="speed">--</span></p>
-        <p><span class="label">Pressure SP:</span> <span id="pressureSP">--</span></p>
-        <p><span class="label">Cooling Demand:</span> <span id="coolCall">--</span></p>
-        <p><span class="label">Heating Demand:</span> <span id="heatCall">--</span></p>
-        <p><span class="label">Occupancy Status:</span> <span id="occupancy">--</span></p>
+        <p><span class="label">Discharge Temp:</span> <span id="dischargeTemp"></span></p>
+        <p><span class="label">Setpoint:</span> <span id="setpoint"></span></p>
+        <p><span class="label">Return Temp:</span> <span id="returnTemp"></span></p>
+        <p><span class="label">Mixed Temp:</span> <span id="mixedTemp"></span></p>
+        <p><span class="label">Fan Command:</span> <span id="fanCommand"></span></p>
+        <p><span class="label">Fan Status:</span> <span id="fanStatus"></span></p>
+        <p><span class="label">Speed:</span> <span id="speed"></span></p>
+        <p><span class="label">Pressure SP:</span> <span id="pressureSP"></span></p>
+        <p><span class="label">Cooling Demand:</span> <span id="coolCall"></span></p>
+        <p><span class="label">Heating Demand:</span> <span id="heatCall"></span></p>
+        <p><span class="label">Occupancy Status:</span> <span id="occupancy"></span></p>
       </div>
-      <p><em>This is a snapshot of current readings from AHU sensors.</em></p>
+      <p><em>This is a snapshot of current readings from the AHU.</em></p>
     </div>
 
     <div class="section">
       <h3>Runtime Summary</h3>
-      <p><span class="label">Weekly Runtime (so far):</span> <span id="runtime">--</span> hrs</p>
-      <p><span class="label">Avg Daily Runtime (7 Days):</span> <span id="avgDaily">--</span> hrs/day</p>
-      <p><span class="label">Run Status:</span> <span id="runtimeStatus">--</span></p>
+      <p><span class="label">Weekly Runtime (so far):</span> <span id="runtime"></span> hrs</p>
+      <p><span class="label">Avg Daily Runtime (7 Days):</span> <span id="avgDaily"></span> hrs/day</p>
+      <p><span class="label">Run Status:</span> <span id="runtimeStatus"></span></p>
       <p><em>This shows how much the fan was running in the past week and whether it’s currently active.</em></p>
     </div>
 
     <div class="section">
       <h3>Temperature Insights</h3>
-      <p><span class="label">Max Deviation:</span> <span id="maxDev">--</span> °C</p>
-      <p><span class="label">Avg Deviation:</span> <span id="avgDev">--</span> °C</p>
-      <p><span class="label">Stability (Std Dev):</span> <span id="stability">--</span> °C</p>
+      <p><span class="label">Max Deviation:</span> <span id="maxDev"></span> °C</p>
+      <p><span class="label">Avg Deviation:</span> <span id="avgDev"></span> °C</p>
+      <p><span class="label">Stability (Std Dev):</span> <span id="stability"></span> °C</p>
       <p><em>Shows how closely the discharge air temp tracked its setpoint, and how stable it was overall.</em></p>
     </div>
   </div>
@@ -108,7 +103,9 @@
   <script>
     const qs = new URLSearchParams(window.location.search);
     const set = (id, key) => {
-      document.getElementById(id).textContent = qs.get(key) || "--";
+      const el = document.getElementById(id);
+      const val = qs.get(key);
+      if (el) el.textContent = val ?? '--';
     }
 
     set("ahuLabel", "ahu");
@@ -129,9 +126,6 @@
     set("coolCall", "coolCall");
     set("heatCall", "heatCall");
     set("occupancy", "occupancy");
-
-    const emoji = qs.get("statusEmoji") || "🟢";
-    document.getElementById("statusEmoji").textContent = emoji;
   </script>
 </body>
 </html>
