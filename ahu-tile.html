@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AHU Summary Tile</title>
+  <style>
+    body {
+      font-family: Roboto, sans-serif;
+      background-color: #f9f9f9;
+      padding: 16px;
+      max-width: 600px;
+      margin: auto;
+    }
+    .tile {
+      background-color: #fff;
+      border-left: 10px solid #ccc;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    h2 {
+      margin-top: 0;
+      color: #2E86AB;
+      font-size: 24px;
+    }
+    .section {
+      margin-top: 20px;
+    }
+    .section h3 {
+      margin: 0 0 8px 0;
+      font-size: 16px;
+      color: #333;
+    }
+    .section p {
+      margin: 4px 0;
+      font-size: 14px;
+    }
+    .highlight {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .emoji {
+      font-size: 20px;
+      vertical-align: middle;
+    }
+    .label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="tile" id="tile">
+    <h2><span class="emoji" id="statusEmoji">🔧</span> <span id="ahuLabel">AHU</span> Summary</h2>
+
+    <div class="section">
+      <h3>Runtime Summary</h3>
+      <p><span class="label">Weekly Runtime:</span> <span id="runtime">--</span> hrs</p>
+      <p><span class="label">Avg Daily Runtime:</span> <span id="avgDaily">--</span> hrs/day</p>
+      <p><span class="label">Runtime Status:</span> <span id="runtimeStatus">--</span></p>
+      <p><em>This shows how much the fan was running in the past week and how it compares to normal usage.</em></p>
+    </div>
+
+    <div class="section">
+      <h3>Temperature Insights</h3>
+      <p><span class="label">Max Deviation:</span> <span id="maxDev">--</span> °C</p>
+      <p><span class="label">Avg Deviation:</span> <span id="avgDev">--</span> °C</p>
+      <p><span class="label">Stability (Std Dev):</span> <span id="stability">--</span> °C</p>
+      <p><em>Shows how closely the discharge temperature followed its setpoint and how stable it was over time.</em></p>
+    </div>
+
+    <div class="section">
+      <h3>Current Conditions</h3>
+      <p><span class="label">Discharge Temp:</span> <span id="dischargeTemp">--</span></p>
+      <p><span class="label">Setpoint:</span> <span id="setpoint">--</span></p>
+      <p><span class="label">Return Temp:</span> <span id="returnTemp">--</span></p>
+      <p><span class="label">Mixed Temp:</span> <span id="mixedTemp">--</span></p>
+      <p><span class="label">Fan Command:</span> <span id="fanCommand">--</span></p>
+      <p><span class="label">Fan Status:</span> <span id="fanStatus">--</span></p>
+      <p><span class="label">Speed:</span> <span id="speed">--</span></p>
+      <p><span class="label">Pressure SP:</span> <span id="pressureSP">--</span></p>
+      <p><span class="label">Cooling Demand:</span> <span id="coolCall">--</span></p>
+      <p><span class="label">Heating Demand:</span> <span id="heatCall">--</span></p>
+      <p><span class="label">Occupancy Status:</span> <span id="occupancy">--</span></p>
+      <p><em>This is a snapshot of current readings from the AHU sensors.</em></p>
+    </div>
+  </div>
+
+  <script>
+    const qs = new URLSearchParams(window.location.search);
+    const set = (id, key) => {
+      document.getElementById(id).textContent = qs.get(key) || "--";
+    }
+
+    set("ahuLabel", "ahu");
+    set("runtime", "weekly");
+    set("avgDaily", "avgDaily");
+    set("runtimeStatus", "runtimeStatus");
+    set("maxDev", "maxDev");
+    set("avgDev", "avgDev");
+    set("stability", "stability");
+
+    set("dischargeTemp", "dischargeTemp");
+    set("setpoint", "setpoint");
+    set("returnTemp", "returnTemp");
+    set("mixedTemp", "mixedTemp");
+    set("fanCommand", "fanCommand");
+    set("fanStatus", "fanStatus");
+    set("speed", "speed");
+    set("pressureSP", "pressureSP");
+    set("coolCall", "coolCall");
+    set("heatCall", "heatCall");
+    set("occupancy", "occupancy");
+
+    // Emoji logic (optional)
+    const emoji = qs.get("statusEmoji") || "🟢";
+    document.getElementById("statusEmoji").textContent = emoji;
+  </script>
+</body>
+</html>
