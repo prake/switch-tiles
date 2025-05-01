@@ -1,23 +1,54 @@
-<div class="card" style="border-left: 8px solid #ccc;" id="tile">
-  <div class="label" id="ahu">AHU</div>
-  <div class="value" id="runtime">-- hrs</div>
-  <div class="status" id="status" style="margin-top: 8px;">Status</div>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AHU Status Tile</title>
+  <style>
+    body {
+      font-family: Roboto, sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+    .tile {
+      background-color: white;
+      border-left: 10px solid #ccc; /* placeholder color */
+      border-radius: 8px;
+      padding: 16px;
+      max-width: 320px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .ahu {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    .runtime {
+      font-size: 24px;
+      color: #2E86AB;
+      margin-bottom: 8px;
+    }
+    .status {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="tile" id="tile">
+    <div class="ahu" id="ahu">AHU</div>
+    <div class="runtime" id="runtime">-- hrs</div>
+    <div class="status" id="status">Status</div>
+  </div>
 
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const ahu = params.get("ahu");
-  const runtime = params.get("runtime");
-  const status = params.get("status");
-  const color = params.get("color");
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const ahu = params.get("ahu");
+    const runtime = params.get("runtime");
+    const status = params.get("status");
+    const color = params.get("color");
 
-  document.getElementById("ahu").textContent = ahu || "AHU";
-  document.getElementById("runtime").textContent = runtime ? `${runtime} hrs` : "-- hrs";
-  document.getElementById("status").textContent = status || "Status";
+    document.getElementById("ahu").textContent = ahu || "AHU";
+    document.getElementById("runtime").textContent = runtime ? `${runtime} hrs` : "-- hrs";
+    document.getElementById("status").textContent = status || "Status";
 
-  // Optional: color styling
-  if (color) {
-    document.getElementById("tile").style.borderLeftColor = color;
-    document.getElementById("status").style.color = color;
-  }
-</script>
+    if
