@@ -1,25 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>AHU Dashboard Tile</title>
-  <style>
-    body { font-family: Roboto, sans-serif; padding: 20px; background: #f9f9f9; }
-    .card { background: white; border: 1px solid #ccc; border-radius: 8px; padding: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); max-width: 400px; }
-    .value { font-size: 24px; color: #2E86AB; }
-    .label { font-weight: bold; color: #555; }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <div class="label">AHU Runtime</div>
-    <div class="value" id="runtime">Loading...</div>
-  </div>
+<div class="card" style="border-left: 8px solid #ccc;" id="tile">
+  <div class="label" id="ahu">AHU</div>
+  <div class="value" id="runtime">-- hrs</div>
+  <div class="status" id="status" style="margin-top: 8px;">Status</div>
+</div>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const runtime = params.get("runtime");
-    document.getElementById("runtime").textContent = runtime ? `${runtime} hrs` : "—";
-  </script>
-</body>
-</html>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const ahu = params.get("ahu");
+  const runtime = params.get("runtime");
+  const status = params.get("status");
+  const color = params.get("color");
+
+  document.getElementById("ahu").textContent = ahu || "AHU";
+  document.getElementById("runtime").textContent = runtime ? `${runtime} hrs` : "-- hrs";
+  document.getElementById("status").textContent = status || "Status";
+
+  // Optional: color styling
+  if (color) {
+    document.getElementById("tile").style.borderLeftColor = color;
+    document.getElementById("status").style.color = color;
+  }
+</script>
