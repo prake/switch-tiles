@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <title>AHU Summary Tile</title>
   <style>
-    body {
+    html, body {
       font-family: Roboto, sans-serif;
-      background-color: #f9f9f9;
-      padding: 16px;
-      max-width: 600px;
-      margin: auto;
+      background-color: transparent;
+      margin: 0;
+      padding: 0;
+      height: 100%;
     }
     .tile {
       background-color: #fff;
@@ -17,6 +17,8 @@
       border-radius: 10px;
       padding: 16px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      height: 100%;
+      box-sizing: border-box;
     }
     h2 {
       margin-top: 0;
@@ -54,10 +56,10 @@
 
     <div class="section">
       <h3>Runtime Summary</h3>
-      <p><span class="label">Weekly Runtime:</span> <span id="runtime">--</span> hrs</p>
-      <p><span class="label">Avg Daily Runtime:</span> <span id="avgDaily">--</span> hrs/day</p>
-      <p><span class="label">Runtime Status:</span> <span id="runtimeStatus">--</span></p>
-      <p><em>This shows how much the fan was running in the past week and how it compares to normal usage.</em></p>
+      <p><span class="label">Weekly Runtime (so far):</span> <span id="runtime">--</span> hrs</p>
+      <p><span class="label">Avg Daily Runtime (7 Days):</span> <span id="avgDaily">--</span> hrs/day</p>
+      <p><span class="label">Run Status:</span> <span id="runtimeStatus">--</span></p>
+      <p><em>This shows how much the fan was running in the past week and whether it’s currently active.</em></p>
     </div>
 
     <div class="section">
@@ -65,7 +67,7 @@
       <p><span class="label">Max Deviation:</span> <span id="maxDev">--</span> °C</p>
       <p><span class="label">Avg Deviation:</span> <span id="avgDev">--</span> °C</p>
       <p><span class="label">Stability (Std Dev):</span> <span id="stability">--</span> °C</p>
-      <p><em>Shows how closely the discharge temperature followed its setpoint and how stable it was over time.</em></p>
+      <p><em>Shows how closely the discharge air temp tracked its setpoint, and how stable it was overall.</em></p>
     </div>
 
     <div class="section">
@@ -81,15 +83,19 @@
       <p><span class="label">Cooling Demand:</span> <span id="coolCall">--</span></p>
       <p><span class="label">Heating Demand:</span> <span id="heatCall">--</span></p>
       <p><span class="label">Occupancy Status:</span> <span id="occupancy">--</span></p>
-      <p><em>This is a snapshot of current readings from the AHU sensors.</em></p>
+      <p><em>This is a snapshot of current readings from AHU sensors.</em></p>
     </div>
   </div>
 
   <script>
     const qs = new URLSearchParams(window.location.search);
     const set = (id, key) => {
-      document.getElementById(id).textContent = qs.get(key) || "--";
-    }
+      let val = qs.get(key);
+      if (val === "1") val = "Running";
+      else if (val === "0") val = "Not running";
+      if (key === "occupancy") val = val === "1" ? "Occupied" : val === "0" ? "Not occupied" : val;
+      document.getElementById(id).textContent = val || "--";
+    };
 
     set("ahuLabel", "ahu");
     set("runtime", "weekly");
@@ -111,9 +117,7 @@
     set("heatCall", "heatCall");
     set("occupancy", "occupancy");
 
-    // Emoji logic (optional)
-    const emoji = qs.get("statusEmoji") || "🟢";
-    document.getElementById("statusEmoji").textContent = emoji;
+    document.getElementById("statusEmoji").textContent = qs.get("statusEmoji") || "🟢";
   </script>
 </body>
 </html>
