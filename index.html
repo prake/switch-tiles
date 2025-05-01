@@ -11,7 +11,7 @@
     }
     .tile {
       background-color: white;
-      border-left: 10px solid #ccc; /* placeholder color */
+      border-left: 10px solid #ccc;
       border-radius: 8px;
       padding: 16px;
       max-width: 320px;
@@ -31,6 +31,28 @@
       font-size: 16px;
       font-weight: bold;
     }
+
+    /* Safe platform-friendly class-based colors */
+    .status-warning {
+      border-left-color: #ffc107;
+    }
+    .status-warning .status {
+      color: #ffc107;
+    }
+
+    .status-alert {
+      border-left-color: #dc3545;
+    }
+    .status-alert .status {
+      color: #dc3545;
+    }
+
+    .status-ok {
+      border-left-color: #28a745;
+    }
+    .status-ok .status {
+      color: #28a745;
+    }
   </style>
 </head>
 <body>
@@ -40,24 +62,23 @@
     <div class="status" id="status">Status</div>
   </div>
 
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const ahu = params.get("ahu");
-  const runtime = params.get("runtime");
-  const status = params.get("status");
-  const color = params.get("color");
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const ahu = params.get("ahu");
+    const runtime = params.get("runtime");
+    const status = params.get("status");
 
-  console.log("Color param:", color); // <-- Add this line
+    // Set content
+    document.getElementById("ahu").textContent = ahu || "AHU";
+    document.getElementById("runtime").textContent = runtime ? `${runtime} hrs` : "-- hrs";
+    document.getElementById("status").textContent = status || "Status";
 
-  document.getElementById("ahu").textContent = ahu || "AHU";
-  document.getElementById("runtime").textContent = runtime ? `${runtime} hrs` : "-- hrs";
-  document.getElementById("status").textContent = status || "Status";
-
-  if (color) {
-    document.getElementById("tile").style.borderLeftColor = color;
-    document.getElementById("status").style.color = color;
-  }
-</script>
-
+    // Apply class-based styling (safe in Switch)
+    if (status) {
+      const tile = document.getElementById("tile");
+      const safeClass = "status-" + status.toLowerCase();
+      tile.classList.add(safeClass);
+    }
+  </script>
 </body>
 </html>
