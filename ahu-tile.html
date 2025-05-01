@@ -46,14 +46,16 @@
       display: flex;
       justify-content: space-between;
       font-size: 14px;
-      margin: 2px 0;
+      margin: 4px 0;
     }
 
     .row-label span.label {
       font-weight: bold;
+      flex: 1;
     }
 
     .row-label span.value {
+      flex: 1;
       text-align: right;
       white-space: nowrap;
     }
@@ -82,7 +84,7 @@
       <div class="row-label"><span class="label">Cooling Demand:</span> <span class="value" id="coolCall"></span></div>
       <div class="row-label"><span class="label">Heating Demand:</span> <span class="value" id="heatCall"></span></div>
       <div class="row-label"><span class="label">Occupancy Status:</span> <span class="value" id="occupancy"></span></div>
-      <p class="description">This is a snapshot of current readings from AHU sensors.</p>
+      <p class="description">This is a snapshot of current readings from the AHU.</p>
     </div>
 
     <div class="section">
