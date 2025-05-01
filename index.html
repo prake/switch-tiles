@@ -51,4 +51,10 @@
     document.getElementById("runtime").textContent = runtime ? `${runtime} hrs` : "-- hrs";
     document.getElementById("status").textContent = status || "Status";
 
-    if
+    if (color) {
+      document.getElementById("tile").style.borderLeftColor = color;
+      document.getElementById("status").style.color = color;
+    }
+  </script>
+</body>
+</html>
