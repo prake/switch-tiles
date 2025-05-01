@@ -12,8 +12,14 @@
 </head>
 <body>
   <div class="card">
-    <div class="label">AHU-1 Runtime</div>
-    <div class="value">12.0 hrs</div>
+    <div class="label">AHU Runtime</div>
+    <div class="value" id="runtime">Loading...</div>
   </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const runtime = params.get("runtime");
+    document.getElementById("runtime").textContent = runtime ? `${runtime} hrs` : "—";
+  </script>
 </body>
 </html>
