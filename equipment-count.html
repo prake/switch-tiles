@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Equipment Count by Type</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Roboto, sans-serif;
+      background-color: #f9f9f9;
+    }
+    .tile {
+      padding: 24px;
+      height: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      background-color: #fff;
+      border-left: 8px solid #5C4D7D;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    h2 {
+      margin-top: 0;
+      color: #2E86AB;
+      font-size: 22px;
+    }
+    .item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+    .label {
+      font-weight: bold;
+      color: #333;
+    }
+    .value {
+      color: #5C4D7D;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="tile">
+    <h2>📦 Equipment Count by Type</h2>
+    <div id="content"></div>
+  </div>
+
+  <script>
+    const qs = new URLSearchParams(window.location.search);
+    const contentDiv = document.getElementById("content");
+
+    for (const [key, value] of qs.entries()) {
+      const item = document.createElement("div");
+      item.className = "item";
+      const labelSpan = document.createElement("span");
+      labelSpan.className = "label";
+      labelSpan.textContent = key;
+      const valueSpan = document.createElement("span");
+      valueSpan.className = "value";
+      valueSpan.textContent = value;
+      item.appendChild(labelSpan);
+      item.appendChild(valueSpan);
+      contentDiv.appendChild(item);
+    }
+  </script>
+</body>
+</html>
