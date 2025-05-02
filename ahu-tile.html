@@ -43,8 +43,8 @@
     }
 
     .row-label {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 180px 1fr;
       font-size: 14px;
       margin: 4px 0;
       padding: 0 16px;
@@ -52,13 +52,9 @@
 
     .row-label span.label {
       font-weight: bold;
-      flex: 1;
-      text-align: left;
     }
 
     .row-label span.value {
-      flex: 1;
-      text-align: left;
       white-space: nowrap;
     }
 
@@ -92,17 +88,17 @@
 
     <div class="section">
       <h3>Runtime Summary</h3>
-      <div class="row-label"><span class="label">Weekly Runtime (so far):</span> <span class="value" id="runtime"></span> hrs</div>
-      <div class="row-label"><span class="label">Avg Daily Runtime (7 Days):</span> <span class="value" id="avgDaily"></span> hrs/day</div>
+      <div class="row-label"><span class="label">Weekly Runtime (so far):</span> <span class="value" id="runtime"></span></div>
+      <div class="row-label"><span class="label">Avg Daily Runtime (7 Days):</span> <span class="value" id="avgDaily"></span></div>
       <div class="row-label"><span class="label">Run Status:</span> <span class="value" id="runtimeStatus"></span></div>
       <p class="description">This shows how much the fan was running in the past week and whether it’s currently active.</p>
     </div>
 
     <div class="section">
       <h3>Temperature Insights</h3>
-      <div class="row-label"><span class="label">Max Deviation:</span> <span class="value" id="maxDev"></span> °C</div>
-      <div class="row-label"><span class="label">Avg Deviation:</span> <span class="value" id="avgDev"></span> °C</div>
-      <div class="row-label"><span class="label">Stability (Std Dev):</span> <span class="value" id="stability"></span> °C</div>
+      <div class="row-label"><span class="label">Max Deviation:</span> <span class="value" id="maxDev"></span></div>
+      <div class="row-label"><span class="label">Avg Deviation:</span> <span class="value" id="avgDev"></span></div>
+      <div class="row-label"><span class="label">Stability (Std Dev):</span> <span class="value" id="stability"></span></div>
       <p class="description">Shows how closely the discharge air temp tracked its setpoint, and how stable it was overall.</p>
     </div>
   </div>
