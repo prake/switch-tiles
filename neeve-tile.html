@@ -72,16 +72,12 @@
   </div>
 
   <script>
-    // Example embedded widget format: { "MacAddress": "...", "InternalIpAddress": "...", ... }
-    window.addEventListener('message', function(event) {
-      const data = event.data;
-      if (data && typeof data === 'object') {
-        document.getElementById('mac').textContent = data.MacAddress || '-';
-        document.getElementById('ip').textContent = data.InternalIpAddress || '-';
-        document.getElementById('date').textContent = data.CommissionDate || '-';
-        document.getElementById('subnet').textContent = data.NetworkSubnet || '-';
-      }
-    });
+    // Parse URL parameters
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById('mac').textContent = params.get("MacAddress") || "-";
+    document.getElementById('ip').textContent = params.get("InternalIpAddress") || "-";
+    document.getElementById('date').textContent = params.get("CommissionDate") || "-";
+    document.getElementById('subnet').textContent = params.get("NetworkSubnet") || "-";
   </script>
 </body>
 </html>
