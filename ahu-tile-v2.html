@@ -1,0 +1,52 @@
+<div style="font-family: Roboto, sans-serif; max-width: 700px; margin: auto; background-color: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.1);">
+  <h2 style="color: #2E86AB; margin-bottom: 10px;">🌬️ AHU01 – Live Health Snapshot</h2>
+
+  <table style="width: 100%; border-collapse: collapse;">
+    <tr>
+      <th align="left">Metric</th>
+      <th align="center">Current</th>
+      <th align="center">Context</th>
+    </tr>
+
+    <tr>
+      <td>Discharge Temp</td>
+      <td>{{DAT}} °C</td>
+      <td>Δ {{DAT - DAT_SP}} °C</td>
+    </tr>
+    <tr>
+      <td>Discharge Pressure</td>
+      <td>{{DAP}} Pa</td>
+      <td>Δ {{DAP - DAP_SP}} Pa</td>
+    </tr>
+    <tr>
+      <td>Return Temp</td>
+      <td>{{RAT}} °C</td>
+      <td>Δ {{RAT - RAT_SP}} °C</td>
+    </tr>
+    <tr>
+      <td>CHW Flow Rate</td>
+      <td>{{CHW_Flow}} L/s</td>
+      <td>ΔT {{CHW_Ent - CHW_Lvg}} °C</td>
+    </tr>
+    <tr>
+      <td>HHW Flow Rate</td>
+      <td>{{HHW_Flow}} L/s</td>
+      <td>Δ {{RAT_SP - RAT}} °C</td>
+    </tr>
+    <tr>
+      <td>Energy Recovery Wheel</td>
+      <td>{{ERW_Speed}}%</td>
+      <td>{{ERW_Comment}}</td>
+    </tr>
+    <tr>
+      <td>Circulation Pump</td>
+      <td>{{Pump_Command}}</td>
+      <td>{{Pump_Comment}}</td>
+    </tr>
+    <tr>
+      <td>Exhaust Damper</td>
+      <td>{{Damper_Position}}%</td>
+      <td>{{Damper_Comment}}</td>
+    </tr>
+  </table>
+</div>
