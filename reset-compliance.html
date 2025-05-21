@@ -56,26 +56,15 @@
 
   <div class="summary-box">
     <div class="summary-header">🎉 Great work!</div>
-    <p>You have <b>5 equipment zones</b> in full compliance with RESET air quality thresholds:</p>
-    <p><b>AHU-1</b>, <b>AHU-2</b>, <b>AHU-3</b>, <b>VAV-01</b>, <b>VAV-02</b></p>
+    <p id="pass-intro">You have <b>...</b> equipment zones in full compliance with RESET air quality thresholds:</p>
+    <p id="pass-list"><b>...</b></p>
   </div>
 
   <div class="summary-box">
     <div class="summary-header">💥 Sensors Needing Attention</div>
     <details open>
       <summary>Expand to view details</summary>
-      <div class="sensor-block">
-        <b>AHU-4 — Zone Air CO2</b><br>
-        Exceeded RESET limit of 1000 on 7 of the last 30 days.<br>
-        Max: 1245 (2024-05-02), Min: 1012 (2024-04-29).<br>
-        <span class="badge fail">❌ Failing</span> <span class="badge">Coverage: ✅ OK</span>
-      </div>
-      <div class="sensor-block">
-        <b>AHU-5 — Zone Air PM2.5</b><br>
-        Exceeded RESET limit of 35 on 3 of the last 30 days.<br>
-        Max: 56 (2024-05-01), Min: 38 (2024-04-28).<br>
-        <span class="badge marginal">⚠️ Marginal</span> <span class="badge">Coverage: ❌ Low Coverage</span>
-      </div>
+      <div id="fail-details">...</div>
     </details>
   </div>
 
@@ -86,6 +75,27 @@
   <script>
     // Auto-update timestamp
     document.getElementById('timestamp').textContent = new Date().toLocaleDateString();
+
+    // Function to get URL parameters
+    function getQueryParam(key) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(key);
+    }
+
+    // Inject passing equipment list
+    const passingRaw = getQueryParam("passing");
+    if (passingRaw) {
+      const decoded = decodeURIComponent(passingRaw);
+      const items = decoded.split(", ");
+      document.getElementById("pass-list").innerHTML = items.map(name => `<b>${name}</b>`).join(", ");
+      document.getElementById("pass-intro").innerHTML = `You have <b>${items.length} equipment zones</b> in full compliance with RESET air quality thresholds:`;
+    }
+
+    // Inject failing HTML
+    const failingRaw = getQueryParam("failing");
+    if (failingRaw) {
+      document.getElementById("fail-details").innerHTML = decodeURIComponent(failingRaw);
+    }
   </script>
 </body>
 </html>
