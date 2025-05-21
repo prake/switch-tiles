@@ -83,50 +83,17 @@
     RESET Compliance Summary
   </h1>
 
-    <!-- 🎉 Things are looking good for these sensors. Great work! block -->
-  </div>
-</body>
-
   <div class="summary-box">
     <div class="summary-header">🎉 Great work!</div>
-    <div class="summary-subheader">10 equipment zones in full compliance</div>
-    <div class="passing-grid">
-      <span><b>Lab 217</b></span>
-      <span><b>Business 247</b></span>
-      <span><b>Office 111D</b></span>
-      <span><b>Collab 125</b></span>
-      <span><b>Electronics 126</b></span>
-      <span><b>Learning 142</b></span>
-      <span><b>Hall 144</b></span>
-      <span><b>Flex 117</b></span>
-      <span><b>Trades 115</b></span>
-      <span><b>Group 224</b></span>
-    </div>
+    <div class="summary-subheader" id="passing-subheader"></div>
+    <div class="passing-grid" id="passing-zones"></div>
   </div>
 
   <div class="summary-box">
     <div class="summary-header">💥 Sensors Needing Attention</div>
-    <div class="summary-subheader">3 sensors exceeded RESET thresholds</div>
     <details open>
       <summary>▼ Expand to view details</summary>
-      <div class="sensor-block">
-        <b>Health 202 — Zone Air TVOC</b><br>
-        Exceeded RESET limit of 500.0 on 16 of the last 30 days.<br>
-        Max: 1080.0 (2024-05-11), Min: 516.0 (2024-05-03).<br>
-        <span class="badge fail">❌ Failing</span> <span class="badge">Coverage: ✅ OK</span>
-      </div>
-      <div class="sensor-block">
-        <b>Flex 213 — Zone Air TVOC</b><br>
-        Exceeded RESET limit of 500.0 on 13 of the last 30 days.<br>
-        Max: 1089.0 (2024-05-18), Min: 548.0 (2024-04-24).<br>
-        <span class="badge fail">❌ Failing</span> <span class="badge">Coverage: ✅ OK</span>
-      </div>
-      <div class="sensor-block">
-        <b>Computer 226 — Zone Air TVOC</b><br>
-        Exceeded RESET limit of 500.0 on 13 of the last 30 days.<br>
-        Max: 1064.0 (2024-05-18), Min: 538.0 (2024-05-12).<br>
-        <span class="badge fail">❌ Failing</span> <span class="badge">Coverage: ✅ OK</span>
-      </div>
+      <div id="failing-sensors"></div>
     </details>
   </div>
 
@@ -135,7 +102,20 @@
   </div>
 
   <script>
-    document.getElementById('timestamp').textContent = new Date().toLocaleDateString();
+    const params = new URLSearchParams(window.location.search);
+
+    const passing = decodeURIComponent(params.get("passing") || "");
+    const failing = decodeURIComponent(params.get("failing") || "");
+
+    const passList = passing.split(",").map(name => name.trim()).filter(x => x);
+    document.getElementById("passing-subheader").textContent = `${passList.length} equipment zones in full compliance`;
+
+    document.getElementById("passing-zones").innerHTML = passList
+      .map(name => `<span><b>${name}</b></span>`)
+      .join("");
+
+    document.getElementById("failing-sensors").innerHTML = failing;
+    document.getElementById("timestamp").textContent = new Date().toLocaleDateString();
   </script>
 
 </body>
