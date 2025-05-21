@@ -88,22 +88,16 @@
     RESET Compliance Summary
   </h1>
 
-  <div class="summary-box" style="background: #e2f0fb; border-left: 4px solid #007bff;">
-    <div class="summary-header">🌿 About RESET</div>
-    <p>RESET is a sensor-based, performance-driven building standard focused on indoor environmental quality. This summary reflects the most recent air quality data collected by certified sensors deployed across the facility.</p>
-    <p>Learn more at <a href="https://reset.build" target="_blank">reset.build</a>.</p>
-  </div>
-
-  <div class="summary-box">
-    <div class="summary-header">🎉 Great work!</div>
+  <div class="summary-box" style="border-left: 4px solid #28a745;">
+    <div class="summary-header">🎉 Great work! The air quality in these areas is currently RESET compliant</div>
     <div class="summary-subheader">Equipment zones in full compliance</div>
     <div class="passing-grid" id="passing-zones">
       <!-- populated by query parameter `?passing=` -->
     </div>
   </div>
 
-  <div class="summary-box">
-    <div class="summary-header">💥 Sensors Needing Attention</div>
+  <div class="summary-box" style="border-left: 4px solid #dc3545;">
+    <div class="summary-header">💥 These sensors need some attention</div>
     <div class="summary-subheader">Details for failing or marginal sensors</div>
     <details open>
       <summary>▼ Expand to view details</summary>
@@ -111,6 +105,12 @@
         <!-- populated by query parameter `?failing=` -->
       </div>
     </details>
+  </div>
+
+  <div class="summary-box" style="background: #e2f0fb; border-left: 4px solid #007bff;">
+    <div class="summary-header">🌿 About RESET</div>
+    <p>RESET is a sensor-based, performance-driven building standard focused on indoor environmental quality. This summary reflects the most recent air quality data collected by certified sensors deployed across the facility.</p>
+    <p>Learn more at <a href="https://reset.build" target="_blank">reset.build</a>.</p>
   </div>
 
   <div class="footer">
