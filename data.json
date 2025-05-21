@@ -1,0 +1,18 @@
+{
+  "lastUpdated": "2024-05-19",
+  "totalSensors": 12,
+  "passingSensors": 9,
+  "failingSensors": 3,
+  "failingList": [
+    {
+      "label": "AHU-2",
+      "metric": "Zone Air CO2",
+      "status": "❌ Failing"
+    },
+    {
+      "label": "VAV-01",
+      "metric": "Zone Air PM2.5",
+      "status": "⚠️ Marginal"
+    }
+  ]
+}
