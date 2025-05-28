@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quarterly Summary</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f7f9;
+      margin: 0;
+      padding: 0;
+    }
+    .dashboard-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      padding: 16px;
+      box-sizing: border-box;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .tile {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .label {
+      font-size: 13px;
+      color: #777;
+      margin-bottom: 4px;
+    }
+    .value {
+      font-size: 22px;
+      font-weight: 600;
+      color: #333;
+    }
+    .highlight {
+      color: #2e7d32;
+    }
+    .alert {
+      color: #c62828;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="tile">
+      <div class="label">Total Live Points</div>
+      <div class="value" id="TotalPointCount">-</div>
+    </div>
+    <div class="tile">
+      <div class="label">New Points This Quarter</div>
+      <div class="value highlight" id="NewPointsThisQuarter">-</div>
+    </div>
+    <div class="tile">
+      <div class="label">Net Change vs Last Quarter</div>
+      <div class="value highlight" id="NetChangeVsLastQuarter">-</div>
+    </div>
+    <div class="tile">
+      <div class="label">Sites with Point Additions</div>
+      <div class="value" id="SitesAddedPoints">-</div>
+    </div>
+    <div class="tile">
+      <div class="label">Total Sites in Project</div>
+      <div class="value" id="TotalSiteCount">-</div>
+    </div>
+    <div class="tile">
+      <div class="label">Equipment Types Reduced</div>
+      <div class="value alert" id="EquipmentTypesReduced">-</div>
+    </div>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById("TotalPointCount").textContent = params.get("TotalPointCount") || "-";
+    document.getElementById("NewPointsThisQuarter").textContent = "+" + (params.get("NewPointsThisQuarter") || "-");
+    document.getElementById("NetChangeVsLastQuarter").textContent = "+" + (params.get("NetChangeVsLastQuarter") || "-") + "%";
+    document.getElementById("SitesAddedPoints").textContent = params.get("SitesAddedPoints") + " of " + (params.get("TotalSiteCount") || "-");
+    document.getElementById("TotalSiteCount").textContent = params.get("TotalSiteCount") || "-";
+    document.getElementById("EquipmentTypesReduced").textContent = params.get("EquipmentTypesReduced") || "-";
+  </script>
+</body>
+</html>
