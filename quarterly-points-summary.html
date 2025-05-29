@@ -5,7 +5,7 @@
   <title>Quarterly Summary</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Roboto', 'Segoe UI', sans-serif;
       background-color: #f4f7f9;
       margin: 0;
       padding: 0;
@@ -29,9 +29,10 @@
       justify-content: flex-end;
     }
     .label {
-      font-size: 13px;
-      color: #777;
-      margin-bottom: 4px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 6px;
     }
     .value {
       font-size: 22px;
@@ -75,12 +76,14 @@
   </div>
   <script>
     const params = new URLSearchParams(window.location.search);
-    document.getElementById("TotalPointCount").textContent = params.get("TotalPointCount") || "-";
-    document.getElementById("NewPointsThisQuarter").textContent = "+" + (params.get("NewPointsThisQuarter") || "-");
-    document.getElementById("NetChangeVsLastQuarter").textContent = "+" + (params.get("NetChangeVsLastQuarter") || "-") + "%";
-    document.getElementById("SitesAddedPoints").textContent = params.get("SitesAddedPoints") + " of " + (params.get("TotalSiteCount") || "-");
-    document.getElementById("TotalSiteCount").textContent = params.get("TotalSiteCount") || "-";
-    document.getElementById("EquipmentTypesReduced").textContent = params.get("EquipmentTypesReduced") || "-";
+    const formatNumber = (val) => val ? Number(val).toLocaleString() : "-";
+
+    document.getElementById("TotalPointCount").textContent = formatNumber(params.get("TotalPointCount"));
+    document.getElementById("NewPointsThisQuarter").textContent = "+" + formatNumber(params.get("NewPointsThisQuarter"));
+    document.getElementById("NetChangeVsLastQuarter").textContent = "+" + formatNumber(params.get("NetChangeVsLastQuarter")) + "%";
+    document.getElementById("SitesAddedPoints").textContent = `${formatNumber(params.get("SitesAddedPoints"))} of ${formatNumber(params.get("TotalSiteCount"))}`;
+    document.getElementById("TotalSiteCount").textContent = formatNumber(params.get("TotalSiteCount"));
+    document.getElementById("EquipmentTypesReduced").textContent = formatNumber(params.get("EquipmentTypesReduced"));
   </script>
 </body>
 </html>
