@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quarterly Equipment Change Report</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f9fa;
+      padding: 20px;
+      color: #212529;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid #dee2e6;
+    }
+    th {
+      background-color: #f1f3f5;
+      font-weight: 600;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .highlight {
+      color: #2e7d32;
+      font-weight: bold;
+    }
+    .alert {
+      color: #c62828;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>Quarterly Equipment Change Report</h2>
+  <table id="reportTable">
+    <thead>
+      <tr>
+        <th>Site</th>
+        <th>Equipment Type</th>
+        <th>Total Points</th>
+        <th>Change Since Last Quarter</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    function getParameterByName(name) {
+      const url = window.location.href;
+      name = name.replace(/[\[\]]/g, '\\$&');
+      const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+      const results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    function renderTable(data) {
+      const tableBody = document.querySelector('#reportTable tbody');
+      tableBody.innerHTML = '';
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+
+        const tdSite = document.createElement('td');
+        tdSite.textContent = row.InstallationName;
+
+        const tdEquip = document.createElement('td');
+        tdEquip.textContent = row.EquipmentType;
+
+        const tdTotal = document.createElement('td');
+        tdTotal.textContent = Number(row.TotalPointCount).toLocaleString();
+
+        const tdChange = document.createElement('td');
+        tdChange.textContent = row.ChangeSinceLastQuarter;
+        if (row.ChangeSinceLastQuarter.startsWith('+')) {
+          tdChange.className = 'highlight';
+        } else if (row.ChangeSinceLastQuarter.startsWith('-')) {
+          tdChange.className = 'alert';
+        }
+
+        tr.appendChild(tdSite);
+        tr.appendChild(tdEquip);
+        tr.appendChild(tdTotal);
+        tr.appendChild(tdChange);
+        tableBody.appendChild(tr);
+      });
+    }
+
+    const jsonDataParam = getParameterByName('data');
+    if (jsonDataParam) {
+      try {
+        const parsed = JSON.parse(jsonDataParam);
+        renderTable(parsed);
+      } catch (e) {
+        console.error('Failed to parse JSON:', e);
+      }
+    } else {
+      document.querySelector('#reportTable tbody').innerHTML = '<tr><td colspan="4">No data provided.</td></tr>';
+    }
+  </script>
+</body>
+</html>
