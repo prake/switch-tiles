@@ -42,7 +42,9 @@
     .sensor-block {
       margin-bottom: 1rem;
       line-height: 1.5;
-      transition: background 0.2s ease-in-out;
+      border-bottom: 1px solid #e3e3e3;
+      padding-bottom: 0.5rem;
+      break-inside: avoid;
     }
     .sensor-block:hover {
       background-color: #f1f3f5;
@@ -51,6 +53,20 @@
     }
     .sensor-block b {
       color: #343a40;
+    }
+    .sensor-columns {
+      column-count: 3;
+      column-gap: 2rem;
+    }
+    @media (max-width: 1024px) {
+      .sensor-columns {
+        column-count: 2;
+      }
+    }
+    @media (max-width: 768px) {
+      .sensor-columns {
+        column-count: 1;
+      }
     }
     .passing-grid {
       display: flex;
@@ -99,7 +115,7 @@
   <div class="summary-box" style="border-left: 4px solid #dc3545;">
     <div class="summary-header">💥 These sensors need some attention</div>
     <div class="summary-subheader">Details for failing or marginal sensors</div>
-      <div id="failing-sensors">
+      <div id="failing-sensors" class="sensor-columns">
         <!-- populated by query parameter `?failing=` -->
       </div>
   </div>
