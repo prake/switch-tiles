@@ -36,21 +36,31 @@
       border-radius: 0.4em;
       margin-left: 0.5rem;
     }
-    .pass { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
     .fail { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
     .marginal { background: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
     .sensor-block {
       margin-bottom: 1rem;
       line-height: 1.5;
-      transition: background 0.2s ease-in-out;
-    }
-    .sensor-block:hover {
-      background-color: #eef6fb;
-      border-radius: 6px;
-      padding: 0.5rem;
+      border-bottom: 1px solid #e3e3e3;
+      padding-bottom: 0.5rem;
+      break-inside: avoid;
     }
     .sensor-block b {
       color: #343a40;
+    }
+    .sensor-columns {
+      column-count: 3;
+      column-gap: 2rem;
+    }
+    @media (max-width: 1024px) {
+      .sensor-columns {
+        column-count: 2;
+      }
+    }
+    @media (max-width: 768px) {
+      .sensor-columns {
+        column-count: 1;
+      }
     }
     .passing-grid {
       display: flex;
@@ -64,10 +74,6 @@
       padding: 0.3rem 0.6rem;
       border-radius: 0.3rem;
       font-size: 0.85rem;
-    }
-    details summary {
-      font-weight: 500;
-      cursor: pointer;
     }
     .footer {
       margin-top: 2rem;
@@ -90,7 +96,7 @@
 
   <div class="summary-box" style="border-left: 4px solid #28a745;">
     <div class="summary-header">🌼 These spaces meet WELL air quality targets</div>
-    <div class="summary-subheader">Equipment zones with full compliance</div>
+    <div class="summary-subheader">Equipment zones in full compliance</div>
     <div class="passing-grid" id="passing-zones">
       <!-- populated by query parameter `?passing=` -->
     </div>
@@ -99,11 +105,11 @@
   <div class="summary-box" style="border-left: 4px solid #fd7e14;">
     <div class="summary-header">🔎 These sensors are needing attention</div>
     <div class="summary-subheader">Based on WELL daily average thresholds</div>
-      <div id="failing-sensors">
+      <div id="failing-sensors" class="sensor-columns">
         <!-- populated by query parameter `?failing=` -->
       </div>
     <p style="font-size: 0.8rem; color: #6c757d; margin-top: 0.5rem;">
-      Showing the list of failing sensors as it pertains to WELL standards.
+      Showing list of failing or marginal sensors. This list may rotate based on current air quality data.
     </p>
   </div>
 
